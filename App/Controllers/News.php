@@ -4,6 +4,8 @@
 namespace App\Controllers;
 
 
+use App\Exceptions\Core;
+use App\Exceptions\Db;
 use App\View;
 
 class News
@@ -24,6 +26,8 @@ class News
 
     protected function beforeAction()
     {
+//        $ex=new Db('Сообщение об исключении');
+//        throw $ex;
        // echo 'Счетчик';
     }
 

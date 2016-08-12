@@ -10,4 +10,10 @@ $controller=new \App\Controllers\News();
 
 $action=$_GET['action']?:'Index';
 
-$controller->action($action);
+try{
+    $controller->action($action);
+} catch (\App\Exceptions\Core $ex){
+    echo 'Возникло исключение приложения:'.$ex->getMessage();
+} catch (\App\Exceptions\Db $ex){
+    echo 'Что-то не так с базой';
+}
