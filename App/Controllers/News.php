@@ -6,6 +6,7 @@ namespace App\Controllers;
 
 use App\Exceptions\Core;
 use App\Exceptions\Db;
+use App\MultiException;
 use App\View;
 
 class News
@@ -43,5 +44,17 @@ class News
         $this->view->title='My cool site';
         $this->view->news=\App\Models\News::findAll();
         $this->view->display(__DIR__.'/../templates/index.php');
+    }
+    
+    protected function actionCreate()
+    {
+        try{
+            $article=new \App\Models\News();//Новая новость
+            $article->fill([]);//Заполнить данными
+            $article->save();//Сохранить
+        }catch (MultiException $e){
+            $this->view->errors=$e;
+        }
+        $this->view->display(__DIR__.'/../templates/create.php');
     }
 }
